@@ -936,7 +936,7 @@ int json_dumpf(json_t *json, const char *file)
    json_t *string;
    FILE *fp;
    string = json_dumps(json);
-   fp = fopen(file, "w+");
+   fp = fopen(file, "wb+");
    fwrite(json_string_value(string), sizeof(char), json_string_length(string), fp);
    fclose(fp);
    json_delete(string);
@@ -1017,8 +1017,9 @@ void json_iter_delete(json_iter_t *iter)
 #if 0
 int main()
 {
-   json_t *json;
-   json = json_loadf("launch.json");
+   json_t *json, *l;
+   json = json_loadf("test.json");
+   l = json_object_get(json, "launch");
    json_dumpf(json, "dump.json");
    json_delete(json);
    return 1;
