@@ -1023,6 +1023,7 @@ int main()
    l = json_object_get(json, "launch");
    json_dumpf(json, "dump.json");
    json_delete(json);
+   _CrtDumpMemoryLeaks();
    return 1;
 }
 #endif
