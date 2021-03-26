@@ -5,7 +5,7 @@
 /* Create:       <Wednesday November 20 23:13:25 2013> */
 /* Time-stamp:   <Thursday November 21, 10:47:33 2013> */
 /* Mail:         <Xsoda@Live.com> */
-#define _CRT_SECURE_NO_WARNINGS
+
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,6 +19,7 @@
 typedef struct _pair_t pair_t;
 typedef struct _string_t string_t;
 typedef struct _json_parser_t json_parser_t;
+
 #ifdef _MSC_VER
 #define FUNC_ATTR static __inline
 #else
