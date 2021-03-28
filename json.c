@@ -13,8 +13,8 @@
 #include <stddef.h>
 #include <stdarg.h>
 #include "json.h"
-#include "list.h"
-#include "avl-inl.h"
+#include "../common/list.h"
+#include "../common/avl-inl.h"
 
 typedef struct _pair_t pair_t;
 typedef struct _string_t string_t;

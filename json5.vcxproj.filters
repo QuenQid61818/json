@@ -23,11 +23,5 @@
     <ClInclude Include="json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="avl-inl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
