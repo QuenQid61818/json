@@ -473,7 +473,11 @@ FUNC_ATTR json_t  *parse_object(json_parser_t *parser)
       json_object_set(object, key->string.ptr, value);
       json_delete(key);
       skip_space(parser);
-      if (*parser->pos == ',') parser->pos++;
+      if (*parser->pos == ',')
+      {
+         parser->pos++;
+         skip_space(parser);
+      }
       else if (*parser->pos == '}') break;
       else
       {
@@ -508,7 +512,11 @@ FUNC_ATTR json_t *parse_array(json_parser_t *parser)
       }
       json_array_append(array, value);
       skip_space(parser);
-      if (*parser->pos == ',') parser->pos++;
+      if (*parser->pos == ',') 
+      {
+         parser->pos++; 
+         skip_space(parser);
+      }
       else if (*parser->pos == ']') break;
       else 
       {
@@ -802,8 +810,10 @@ json_t *json_loadf(const char *file)
 {
    FILE *fp;
    json_t *json;
+   size_t bom;
    char *content;
    int length;
+   bom = 0;
    if ((fp = fopen(file, "rb")) == NULL)
       return NULL;
    fseek(fp, 0, SEEK_SET);
@@ -813,7 +823,12 @@ json_t *json_loadf(const char *file)
    if ((content = (char *)malloc(length + 1)) == NULL)
       return NULL;
    fread(content, sizeof(char), length, fp);
-   json = json_loads(content);
+   if ((unsigned char)content[0] == 0xEF
+      && (unsigned char)content[1] == 0xBB
+      && (unsigned char)content[2] == 0xBF)
+      bom = 3;
+   content[length] = 0;
+   json = json_loads(content + bom);
    free(content);
    fclose(fp);
    return json;
@@ -1019,11 +1034,10 @@ void json_iter_delete(json_iter_t *iter)
 int main()
 {
    json_t *json, *l;
-   json = json_loadf("test.json");
+   json = json_loadf("launch.json");
    l = json_object_get(json, "launch");
    json_dumpf(json, "dump.json");
    json_delete(json);
-   _CrtDumpMemoryLeaks();
    return 1;
 }
 #endif
