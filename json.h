@@ -9,10 +9,10 @@
 #ifndef __JSON_H__
 #define __JSON_H__
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 extern "C" {
-#else
-typedef enum {false, true} bool;
 #endif
 
 typedef enum {
